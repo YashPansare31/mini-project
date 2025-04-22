@@ -28,3 +28,13 @@ model.fit(X_train, y_train, epochs=5, batch_size=64)
 
  test_loss, test_accuracy = model.evaluate(X_test, y_test)
  print(f"Test Accuracy: {test_accuracy*100:.2f}")
+
+
+sample_review = X_test[1]
+sample_review = np.expand_dims(sample_review, axis=0) # Expand dimensions to match model input shape (1, 200)
+print("Actual Review: ",{y_test[1]})
+prediction = model.predict(sample_review) # Predict
+
+# Output result
+sentiment = "Positive" if prediction[0][0] > 0.5 else "Negative"
+print("Predicted Sentiment:", sentiment)
