@@ -40,3 +40,23 @@ model.fit(X_train, y_train_cat, epochs=3, batch_size=64, validation_split=0.2)
 # Evaluate
 loss, acc = model.evaluate(X_test, y_test_cat)
 print("Test Accuracy:", acc)
+
+print("Actual Review: ",{y_test[322]})
+
+sample_review = X_test[322]
+sample_review = np.expand_dims(sample_review, axis=0)
+
+# Predict
+prediction = model.predict(sample_review)
+prob = prediction[0][0]
+
+# Determine sentiment based on thresholds
+if prob < 0.4:
+    sentiment = "Negative"
+elif prob > 0.6:
+    sentiment = "Positive"
+else:
+    sentiment = "Neutral"
+
+print("Predicted Sentiment:", sentiment)
+print("Predicted Probability:", prob)
